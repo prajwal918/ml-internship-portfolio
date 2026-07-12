@@ -1,0 +1,9 @@
+[project]
+name = "ml-internship-portfolio"
+version = "0.1.0"
+description = "Five data science internship projects with Streamlit dashboards and ML pipelines."
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
