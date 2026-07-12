@@ -1,0 +1,12 @@
+{
+  "project": "customer_churn",
+  "data_source": "real",
+  "generated_at_utc": "2026-07-12T13:54:56.332194+00:00",
+  "metrics": {
+    "baseline_roc_auc": 0.8384375772312684,
+    "final_roc_auc": 0.8292403179979334,
+    "final_precision": 0.5418060200668896,
+    "final_recall": 0.6937901498929336,
+    "final_f1": 0.6084507042253521
+  }
+}

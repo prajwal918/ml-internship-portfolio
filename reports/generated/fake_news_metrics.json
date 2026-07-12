@@ -1,0 +1,11 @@
+{
+  "project": "fake_news",
+  "data_source": "real",
+  "generated_at_utc": "2026-07-12T13:55:05.070658+00:00",
+  "metrics": {
+    "roc_auc": 0.9766652903168209,
+    "precision_fake": 0.9083129584352079,
+    "recall_fake": 0.9393173198482933,
+    "f1_fake": 0.9235550031075201
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "project": "employee_performance",
+  "data_source": "real",
+  "generated_at_utc": "2026-07-12T13:55:05.548579+00:00",
+  "metrics": {
+    "baseline_f1": 0.26823529411764707,
+    "final_f1": 0.2690909090909091,
+    "final_accuracy": 0.453804347826087,
+    "final_precision": 0.16972477064220184,
+    "final_recall": 0.6491228070175439,
+    "demographic_parity_difference": 0.10561119058973134
+  }
+}

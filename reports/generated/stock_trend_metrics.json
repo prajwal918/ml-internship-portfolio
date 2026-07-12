@@ -1,0 +1,11 @@
+{
+  "project": "stock_trend",
+  "data_source": "real",
+  "generated_at_utc": "2026-07-12T13:54:56.809917+00:00",
+  "metrics": {
+    "baseline_accuracy": 0.5534804753820034,
+    "final_accuracy": 0.41935483870967744,
+    "baseline_f1": 0.3538083538083538,
+    "final_f1": 0.45714285714285713
+  }
+}
