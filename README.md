@@ -1,6 +1,6 @@
 # Data Science / ML Internship Portfolio
 
-This repository implements five end-to-end Machine Learning projects, built with a strong focus on *Monozukuri* (craftsmanship), predictable architecture, and graceful failure handling.
+This repository implements five end-to-end Machine Learning projects, built with a strong focus on enterprise engineering standards, predictable architecture, and graceful failure handling.
 
 1. Movie Recommendation System
 2. Customer Churn Prediction
@@ -84,7 +84,7 @@ pytest
 
 ## 📂 Project Structure
 
-Following Wabi-Sabi principles for a predictable, explicit layout:
+Following standard design patterns for a predictable, explicit layout:
 
 ```text
 /src/                          Core business logic and ML pipelines
