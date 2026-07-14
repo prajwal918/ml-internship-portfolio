@@ -10,7 +10,9 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 from ml_portfolio.projects import churn, employee, fake_news, movie, stock
+from ml_portfolio.logger import get_logger
 
+logger = get_logger(__name__)
 
 CHECKS = [
     ("MovieLens", lambda: movie.dataset()[2]),
@@ -22,10 +24,9 @@ CHECKS = [
 
 
 def main() -> int:
-    print("Dataset source check")
-    print("--------------------")
+    logger.info("Starting Dataset source check")
     for name, check in CHECKS:
-        print(f"{name}: {check()}")
+        logger.info(f"{name}: {check()}")
     return 0
 
 
