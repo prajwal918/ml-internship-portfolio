@@ -73,11 +73,20 @@ def render_overview() -> None:
     )
 
 
-try:
-    if choice == "Portfolio Overview":
-        render_overview()
-    else:
-        PROJECTS[choice]()
-except Exception as e:
-    st.error("An unexpected error occurred while loading the module.")
-    st.exception(e)
+def main() -> None:
+    try:
+        if choice == "Portfolio Overview":
+            render_overview()
+        else:
+            if choice not in PROJECTS:
+                raise ValueError(f"Project '{choice}' not found.")
+            PROJECTS[choice]()
+    except (KeyError, ValueError) as ve:
+        st.error(f"Configuration error: {str(ve)}")
+        st.exception(ve)
+    except Exception as e:
+        st.error("A critical error occurred while loading the module or rendering the page.")
+        st.exception(e)
+
+if __name__ == "__main__":
+    main()

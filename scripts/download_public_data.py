@@ -76,8 +76,24 @@ def download_stock_ohlcv() -> None:
         print(f"Saved {path}")
 
 
+def main() -> int:
+    try:
+        logger.info("Starting public data downloads...")
+        
+        download_movielens_100k()
+        download_tabular_public_datasets()
+        download_stock_ohlcv()
+        
+        logger.info("Public data downloads completed successfully.")
+        return 0
+    except Exception as e:
+        logger.error(f"Failed to download public data: {str(e)}", exc_info=True)
+        return 1
+
+
 if __name__ == "__main__":
-    download_movielens_100k()
-    download_tabular_public_datasets()
-    download_stock_ohlcv()
-    print("Public datasets downloaded. Kaggle API is optional for alternate dataset copies.")
+    try:
+        sys.exit(main())
+    except KeyboardInterrupt:
+        logger.warning("Download interrupted by user.")
+        sys.exit(130)

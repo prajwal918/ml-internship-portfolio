@@ -25,23 +25,32 @@ PROJECTS = [
 
 
 def main() -> int:
-    sections: list[str] = ["# Generated Model Metrics\n"]
-    for slug, display_name, trainer in PROJECTS:
-        logger.info(f"Training {display_name}...")
-        result = trainer()
-        source = str(result.extra.get("source", "sample"))
-        model_path = save_model(slug, result.model)
-        metrics_path = save_metrics(slug, result.metrics, source)
-        sections.append(markdown_metric_table(display_name, result.metrics, source))
-        logger.info(f"Saved model: {model_path}")
-        logger.info(f"Saved metrics: {metrics_path}")
+    try:
+        sections: list[str] = ["# Generated Model Metrics\n"]
+        for slug, display_name, trainer in PROJECTS:
+            logger.info(f"Training {display_name}...")
+            result = trainer()
+            if not result:
+                raise RuntimeError(f"Trainer for {display_name} returned no result.")
+            source = str(result.extra.get("source", "sample"))
+            model_path = save_model(slug, result.model)
+            metrics_path = save_metrics(slug, result.metrics, source)
+            sections.append(markdown_metric_table(display_name, result.metrics, source))
+            logger.info(f"Saved model: {model_path}")
+            logger.info(f"Saved metrics: {metrics_path}")
 
-    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    summary_path = REPORTS_DIR / "MODEL_METRICS.md"
-    summary_path.write_text("\n".join(sections), encoding="utf-8")
-    logger.info(f"Summary report generated: {summary_path}")
-    return 0
-
+        REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+        summary_path = REPORTS_DIR / "MODEL_METRICS.md"
+        summary_path.write_text("\n".join(sections), encoding="utf-8")
+        logger.info(f"Summary report generated: {summary_path}")
+        return 0
+    except Exception as e:
+        logger.error(f"Critical failure during training pipeline: {str(e)}", exc_info=True)
+        return 1
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        sys.exit(main())
+    except KeyboardInterrupt:
+        logger.warning("Pipeline interrupted by user.")
+        sys.exit(130)

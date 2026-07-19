@@ -19,21 +19,37 @@ def main() -> int:
     kaggle_config = Path.home() / ".kaggle" / "kaggle.json"
     if not kaggle_config.exists():
         print("Missing Kaggle config: ~/.kaggle/kaggle.json")
-        print("Create a Kaggle API token from Kaggle Account settings, then rerun this script.")
-        return 1
+    return kaggle_config.exists()
 
-    RAW.mkdir(parents=True, exist_ok=True)
-    for name, slug in DATASETS.items():
-        target = RAW / name
-        target.mkdir(parents=True, exist_ok=True)
-        print(f"Downloading {slug} -> {target}")
-        subprocess.run(
-            [sys.executable, "-m", "kaggle", "datasets", "download", "-d", slug, "-p", str(target), "--unzip"],
-            check=True,
-        )
-    print("Kaggle datasets downloaded. Restart Streamlit to use real data.")
-    return 0
+
+def main() -> int:
+    try:
+        if not check_kaggle_credentials():
+            logger.error("Kaggle credentials not found or invalid.")
+            return 1
+            
+        logger.info("Starting Kaggle data downloads...")
+        
+        RAW.mkdir(parents=True, exist_ok=True)
+        for name, slug in DATASETS.items():
+            target = RAW / name
+            target.mkdir(parents=True, exist_ok=True)
+            logger.info(f"Downloading {slug} -> {target}")
+            subprocess.run(
+                [sys.executable, "-m", "kaggle", "datasets", "download", "-d", slug, "-p", str(target), "--unzip"],
+                check=True,
+            )
+        
+        logger.info("Kaggle data downloads placeholder finished.")
+        return 0
+    except Exception as e:
+        logger.error(f"Failed during Kaggle data processing: {str(e)}", exc_info=True)
+        return 1
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        sys.exit(main())
+    except KeyboardInterrupt:
+        logger.warning("Download interrupted by user.")
+        sys.exit(130)
