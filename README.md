@@ -1,3 +1,5 @@
+[![CI](https://github.com/prajwal918/ml-internship-portfolio/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/prajwal918/ml-internship-portfolio/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 # ML Internship Portfolio
 
 An end-to-end Machine Learning ecosystem showcasing multiple models packaged into a Streamlit application. Designed with structural integrity, continuous integration, and containerization.
